@@ -1,6 +1,6 @@
-package com.service.gameservice.service;
+package com.service.gameservice.game.service;
 
-import com.service.gameservice.entity.GameEntity;
+import com.service.gameservice.game.entity.Game;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
@@ -24,13 +24,13 @@ public class GameService {
     }
 
 
-    public GameEntity findGame(int id){
+    public Game findGame(int id){
         getEntityManager();
-        return entityManager.find(GameEntity.class,id);
+        return entityManager.find(Game.class,id);
     }
 
-    public List<GameEntity> getAllGames(){
+    public List<Game> getAllGames(){
         getEntityManager();
-        return entityManager.createQuery("SELECT g FROM GameEntity g",GameEntity.class).getResultList();
+        return entityManager.createQuery("SELECT g FROM Game g", Game.class).getResultList();
     }
 }

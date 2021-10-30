@@ -1,4 +1,4 @@
-package com.service.gameservice.entity;
+package com.service.gameservice.game.entity;
 
 import lombok.*;
 
@@ -12,12 +12,12 @@ import java.sql.Date;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class GameEntity {
+public class Game {
 
     @Id
     @Column(name = "id")
     @GeneratedValue
-    private int id;
+    private Long id;
 
     @Basic
     @Column(name = "gameName")

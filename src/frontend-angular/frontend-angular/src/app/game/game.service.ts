@@ -13,4 +13,8 @@ export class GameService {
   public getGames(): Observable<Game[]> {
     return this.http.get<Game[]>(`http://localhost:8080/GameService/game/all`);
   }
+
+  public getGameName(gameName: string): Observable<Game>{
+    return this.http.get<Game>(`http://localhost:8080/GameService/game/name/${gameName}`);
+  }
 }
