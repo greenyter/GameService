@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from './game';
 import { GameService } from './game.service';
@@ -13,10 +14,13 @@ export class GameComponent implements OnInit {
 
   sub:any
   namePath!:string
+  
+
   public games: Game[] = [];
   public game!: Game;
   constructor(private route: ActivatedRoute,private gameService:GameService) { }
-
+  
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.namePath = params['gameName'];
