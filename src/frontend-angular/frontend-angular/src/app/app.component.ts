@@ -11,40 +11,15 @@ import { GameService } from './game/game.service';
 })
 export class AppComponent implements OnInit {
 
-  public games: Game[] = [];
-  public game!: Game;
 
-  constructor(private gameService:GameService){
+  constructor(){
 
   }
 
 
-  public getGames(): void {
-    this.gameService.getGames().subscribe(
-      (response: Game[]) => {
-        this.games = response;
-        console.log(this.games);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
-
-  public getGameName(gameName: string): void{
-    this.gameService.getGameName(gameName).subscribe(
-    (response: Game) => {
-      this.game = response;
-      console.log(this.games);
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
-    }
-  );
-}
+  
 
   ngOnInit(): void {
-    this.getGameName("Control");
   }
 
   
