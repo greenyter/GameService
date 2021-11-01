@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "game", schema = "game_service")
@@ -25,7 +26,7 @@ public class Game {
 
     @Basic
     @Column(name = "releaseDate")
-    private Date releaseDate;
+    private LocalDateTime releaseDate;
 
     @Basic
     @Column(name = "publisherName")

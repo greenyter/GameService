@@ -1,7 +1,7 @@
 export interface Game{
   id: number;
     gameName:string;
-    releaseDate:string;
+    releaseDate:Date;
     publisherName:string;
     developerName:string;
     gameCover:string;

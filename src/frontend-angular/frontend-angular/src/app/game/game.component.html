@@ -1,10 +1,20 @@
-<div routerLink='/game/name/{{namePath}}'>
-<p>{{game.gameName}}</p>
-<p>{{game.releaseDate}}</p>
-<p>{{game.publisherName}}</p>
-<p>{{game.developerName}}</p>
-<img src={{game.gameCover}}>
-<iframe width="420" height="315" [src]="game.gameTrailer | safe"></iframe>
+<div class="center" routerLink='/game/name/{{namePath}}'>
+    <p>Title: {{game.gameName}}</p>
+    <p>Release date: {{game.releaseDate | date:'dd-MM-yyyy'}}</p>
+    <p>Publisher: {{game.publisherName}}</p>
+    <p>Developer: {{game.developerName}}</p>
+    <p> 
+    <figure>
+        <img src={{game.gameCover}}>
+        <figcaption>Game cover</figcaption>
+    </figure>
+    </p>
+    <p>
+        <figure>
+        <iframe width="420" height="315" [src]="game.gameTrailer | safe"></iframe>
+        <figcaption>Game trailer</figcaption>
+    </figure>
+    </p>
 
-    
+
 </div>

@@ -45,6 +45,8 @@ export class GameComponent implements OnInit {
     this.gameService.getGameName(gameName).subscribe(
     (response: Game) => {
       this.game = response;
+      var date= new Date(this.game.releaseDate);
+      this.game.releaseDate = date;
       console.log(this.games);
     },
     (error: HttpErrorResponse) => {
