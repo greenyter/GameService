@@ -26,7 +26,7 @@ public class Game {
 
     @Basic
     @Column(name = "releaseDate")
-    private LocalDateTime releaseDate;
+    private Date releaseDate;
 
     @Basic
     @Column(name = "publisherName")
