@@ -6,5 +6,5 @@ export interface Game{
     developerName:string;
     gameCover:string;
     gameTrailer:string;    
-
+    gameDescription:string;
 }

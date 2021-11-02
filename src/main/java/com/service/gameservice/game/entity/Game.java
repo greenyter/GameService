@@ -44,6 +44,9 @@ public class Game {
     @Column(name = "gameTrailer")
     private String gameTrailer;
 
+    @Basic
+    @Column(name = "gameDescription")
+    private String gameDescription;
 
 
 
