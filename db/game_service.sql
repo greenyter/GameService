@@ -95,6 +95,3 @@ DEFAULT CHARACTER SET = utf8mb3;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-INSERT INTO game_service.game (id, gameName, gameCategory, releaseDate, publisherName, developerName, gameCover, gameTrailer, gameDescription) VALUES (1, 'Control', 'Shooter', '2019-08-27', '505 Games', 'Remedy Entertainment', 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2evj.png', 'https://youtu.be/BnQwE0ug_Q0','descirption of Control');
-INSERT INTO game_service.game (id, gameName, gameCategory, releaseDate, publisherName, developerName, gameCover, gameTrailer, gameDescription) VALUES (2, 'The Witcher 3: Wild Hunt', 'RPG', '2015-05-19', 'CD Projekt Red', 'CD Projekt Red', 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1wyy.png', 'https://youtu.be/FP7no968jVU','descirption of TW3');
