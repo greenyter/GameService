@@ -19,8 +19,8 @@ public class GameResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("/id/{id}")
-    public Response getGameById(@PathParam("id") Long id) {
+    @Path("/id")
+    public Response getGameById(@QueryParam("id") Long id) {
         Game game = gameRepository.findGameById(id);
 
         if (game == null) {
@@ -32,8 +32,8 @@ public class GameResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("/name/{gameName}")
-    public Response getGameByName(@PathParam("gameName")String name){
+    @Path("/name")
+    public Response getGameByName(@QueryParam("gameName") String name){
         Game game = gameRepository.findGameByName(name);
 
         if (game == null) {

@@ -3,6 +3,7 @@
     <persistence-unit name="Testing" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.service.gameservice.game.entity.Game</class>
+        <class>com.service.gameservice.user.entity.User</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/game_service"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
