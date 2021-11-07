@@ -56,17 +56,21 @@ public class UserRepositoryImpl implements UserRepository {
      */
 
     @Override
-    public User addUser(User user) {
-        return null;
+    @Transactional
+    public void addUser(User user) {
+        getEntityManager();
+        em.getTransaction().begin();
+        em.persist(user);
+        em.getTransaction().commit();
     }
 
     @Override
-    public User changeUserEmail(Long id, String email) {
-        return null;
+    public void changeUserEmail(Long id, String email) {
+
     }
 
     @Override
-    public User promoteToAdmin(Long id) {
-        return null;
+    public void promoteToAdmin(Long id) {
+
     }
 }

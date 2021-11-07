@@ -1,10 +1,14 @@
 package com.service.gameservice.game.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.service.gameservice.util.JSONDataDeserializer;
+import com.service.gameservice.util.JSONDataSerializer;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "game", schema = "game_service")
@@ -13,7 +17,7 @@ import java.time.LocalDateTime;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Game {
+public class Game implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -25,8 +29,14 @@ public class Game {
     private String gameName;
 
     @Basic
+    @Column(name = "gameCategory")
+    private String gameCategory;
+
+    @Basic
+    @JsonSerialize(using = JSONDataSerializer.class)
+    @JsonDeserialize(using = JSONDataDeserializer.class)
     @Column(name = "releaseDate")
-    private Date releaseDate;
+    private LocalDate releaseDate;
 
     @Basic
     @Column(name = "publisherName")

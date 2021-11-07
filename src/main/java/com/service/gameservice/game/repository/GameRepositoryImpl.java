@@ -19,6 +19,7 @@ public class GameRepositoryImpl implements GameRepository {
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory("Testing");
         em = entityManagerFactory.createEntityManager();
+
     }
 
 

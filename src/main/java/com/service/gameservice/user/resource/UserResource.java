@@ -3,10 +3,13 @@ package com.service.gameservice.user.resource;
 import com.service.gameservice.user.entity.User;
 import com.service.gameservice.user.repository.UserRepositoryImpl;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import javax.ejb.PostActivate;
 import javax.ejb.Stateless;
 import java.awt.*;
 
@@ -70,9 +73,21 @@ public class UserResource {
         return Response.ok().status(200).build();
     }
 
-
-
  */
+
+    @POST
+    @Path("/add/new_user")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response createUser(@NotNull @QueryParam("userName")String name,
+                               @NotNull @QueryParam("userPassword")String password,
+                               @NotNull @QueryParam("userEmail")String email){
+        User user = new User();
+        user.setUserName(name);
+        user.setUserPassword(password.getBytes());
+        user.setUserEmail(email);
+        userRepository.addUser(user);
+        return Response.ok(user).build();
+    }
 
 
 }

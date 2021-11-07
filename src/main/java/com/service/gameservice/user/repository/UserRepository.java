@@ -8,13 +8,13 @@ public interface UserRepository {
     User findUserById(Long id);
     User findUserByName(String name);
     User findUserByEmail(String email);
-   // User checkIfUserIsAdmin(Long id);
+   //eee User checkIfUserIsAdmin(Long id);
 
 
     //POST
-    User addUser(User user);
+    void addUser(User user);
 
     //PUT
-    User changeUserEmail(Long id, String email);
-    User promoteToAdmin(Long id);
+    void changeUserEmail(Long id, String email);
+    void promoteToAdmin(Long id);
 }
