@@ -5,18 +5,12 @@
         <class>com.service.gameservice.game.entity.Game</class>
         <class>com.service.gameservice.user.entity.User</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/game_service"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11449720"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="root"/>
+            <property name="javax.persistence.jdbc.user" value="sql11449720"/>
+            <property name="javax.persistence.jdbc.password" value="JUFYxLX5Ws"/>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306"/>
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.sql-load-script-source"
-                      value="db/game_service.sql" />
+
         </properties>
     </persistence-unit>
 </persistence>

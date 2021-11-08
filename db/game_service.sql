@@ -42,7 +42,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE TABLE IF NOT EXISTS `game_service`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `userName` VARCHAR(45) NOT NULL,
-  `userPassword` VARCHAR(45) NOT NULL,
+  `userPassword` BINARY(12) NOT NULL,
   `isAdmin` TINYINT NOT NULL,
   `userAvatar` VARCHAR(45) NULL DEFAULT NULL,
   `userEmail` VARCHAR(45) NOT NULL,
