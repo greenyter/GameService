@@ -2,6 +2,8 @@ package com.service.gameservice.game.resource;
 
 import com.service.gameservice.game.entity.Game;
 import com.service.gameservice.game.repository.GameRepositoryImpl;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -29,7 +31,7 @@ public class GameResource {
         }
         return Response.ok(game).build();
     }
-
+    @RolesAllowed("USER")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/name/{gameName}")
@@ -42,7 +44,7 @@ public class GameResource {
         }
         return Response.ok(game).build();
     }
-
+    @PermitAll
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/all")
