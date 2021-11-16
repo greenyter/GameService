@@ -2,6 +2,7 @@ package com.service.gameservice.user.resource;
 
 import com.service.gameservice.user.entity.User;
 import com.service.gameservice.user.repository.UserRepositoryImpl;
+import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import jakarta.ws.rs.core.Response;
 import javax.ejb.PostActivate;
 import javax.ejb.Stateless;
 import java.awt.*;
+import java.util.Arrays;
 
 @Path("/user")
 @Stateless
@@ -74,20 +76,37 @@ public class UserResource {
     }
 
  */
-
+    @PermitAll
     @POST
     @Path("/add/new_user")
     @Produces({MediaType.APPLICATION_JSON})
     public Response createUser(@NotNull @QueryParam("userName")String name,
                                @NotNull @QueryParam("userPassword")String password,
                                @NotNull @QueryParam("userEmail")String email){
+        if(name.isEmpty() || password.isEmpty()){
+            return Response.status(Response.Status.FORBIDDEN).
+                    entity("There is a forbidden input!").build();
+        }
+        if(userRepository.checkIfUserNameExist(name)){
+            return Response.status(Response.Status.FORBIDDEN).
+                    entity("User with that name exists!").build();
+        }
+
         User user = new User();
-        user.setUserName(name);
-        user.setUserPassword(password.getBytes());
-        user.setUserEmail(email);
-        userRepository.addUser(user);
-        return Response.ok(user).build();
+            user.setUserName(name);
+            user.setUserEmail(email);
+        user.setUserPassword(userRepository.encodePassword(password));
+        if(user.getUserPassword() == null){
+                return Response.status(Response.Status.FORBIDDEN).
+                        entity("There is a forbidden input!").build();
+            }
+
+            userRepository.addUser(user);
+            return Response.ok(user).build();
+
     }
+
+
 
 
 }

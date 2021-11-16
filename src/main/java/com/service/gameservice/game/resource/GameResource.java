@@ -31,7 +31,6 @@ public class GameResource {
         }
         return Response.ok(game).build();
     }
-    @RolesAllowed("USER")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/name/{gameName}")
@@ -44,7 +43,7 @@ public class GameResource {
         }
         return Response.ok(game).build();
     }
-    @PermitAll
+    @RolesAllowed("USER")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/all")

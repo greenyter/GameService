@@ -3,8 +3,10 @@ package com.service.gameservice.user.repository;
 import com.service.gameservice.user.entity.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 
 @ApplicationScoped
@@ -42,6 +44,23 @@ public class UserRepositoryImpl implements UserRepository {
         q.setParameter("userEmail", email);
         return q.getSingleResult();
     }
+
+    @Override
+    public User checkUserCredentials(String userName, String password) {
+        getEntityManager();
+        String encodePassword = encodePassword(password);
+        try {
+
+            Query credentials = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName AND u.userPassword = :encodePassword", User.class);
+            credentials.setParameter("userName", userName);
+            credentials.setParameter("encodePassword", encodePassword);
+            return (User) credentials.getSingleResult();
+        }catch (Exception e){
+            e.fillInStackTrace();
+        }
+
+        return null;
+    }
     /*
     @Override
     public User checkIfUserIsAdmin(Long id) {
@@ -72,5 +91,31 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void promoteToAdmin(Long id) {
 
+    }
+
+    @Override
+    public String encodePassword(String password) {
+        int key = 18;
+        char [] pssArray = password.toCharArray();
+        for(int i=0;i<pssArray.length;i++){
+            int ascii = pssArray[i];
+            ascii*=key;
+            pssArray[i]=(char)ascii;
+        }
+        return String.valueOf(pssArray);
+
+    }
+
+    @Override
+    public boolean checkIfUserNameExist(String userName) {
+        getEntityManager();
+        try {
+            TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
+            q.setParameter("userName", userName);
+            q.getSingleResult();
+            return true;
+        }catch (NoResultException e) {
+            return false;
+        }
     }
 }

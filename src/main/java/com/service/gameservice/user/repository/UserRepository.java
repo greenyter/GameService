@@ -9,7 +9,7 @@ public interface UserRepository {
     User findUserByName(String name);
     User findUserByEmail(String email);
    //eee User checkIfUserIsAdmin(Long id);
-
+    User checkUserCredentials(String userName, String password);
 
     //POST
     void addUser(User user);
@@ -17,4 +17,8 @@ public interface UserRepository {
     //PUT
     void changeUserEmail(Long id, String email);
     void promoteToAdmin(Long id);
+
+    //utils
+    String encodePassword(String password);
+    boolean checkIfUserNameExist(String userName);
 }

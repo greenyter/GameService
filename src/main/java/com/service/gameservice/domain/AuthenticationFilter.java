@@ -1,9 +1,11 @@
 package com.service.gameservice.domain;
 
+import com.service.gameservice.user.repository.UserRepositoryImpl;
 import com.sun.jersey.core.util.Base64;
 import jakarta.annotation.security.DenyAll;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.container.ResourceInfo;
@@ -21,6 +23,9 @@ public class AuthenticationFilter implements ContainerRequestFilter
 
     @Context
     private ResourceInfo resourceInfo;
+
+    @Inject
+    UserRepositoryImpl userRepository;
 
     private static final String AUTHORIZATION_PROPERTY = "Authorization";
     private static final String AUTHENTICATION_SCHEME = "Basic";
@@ -65,9 +70,6 @@ public class AuthenticationFilter implements ContainerRequestFilter
             final String username = tokenizer.nextToken();
             final String password = tokenizer.nextToken();
 
-            //Verifying Username and password
-            System.out.println(username);
-            System.out.println(password);
 
             //Verify user access
             if(method.isAnnotationPresent(RolesAllowed.class))
@@ -94,7 +96,8 @@ public class AuthenticationFilter implements ContainerRequestFilter
         //Access the database and do this part yourself
         //String userRole = userMgr.getUserRole(username);
 
-        if(getUserFromDB("green___"))
+
+        if(getUserFromDB(username,password))
         {
             String userRole = "USER";
 
@@ -108,7 +111,7 @@ public class AuthenticationFilter implements ContainerRequestFilter
     }
 
 
-    private boolean getUserFromDB(String userName){
-        return userName.equals("green___");
+    private boolean getUserFromDB(String userName,String password){
+        return userRepository.checkUserCredentials(userName, password) != null;
     }
 }
