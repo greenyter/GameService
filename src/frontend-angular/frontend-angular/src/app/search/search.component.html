@@ -1,5 +1,16 @@
-Wprowadź nazwę gry:
+<!DOCTYPE HTML>
+<div id="container">
+    <form class="form">
+        <span class="logo" routerLink="/">GameService</span>
+        <input #inputGameUser
+            class="search-input"
+            name="search"
+            ngModel
+            placeholder="Search for games!"
+        />
+    
+        <button (click)='searchGame(inputGameUser.value)'>Search</button>
+    </form>
 
-<input #inputGameUser>
-<button (click)='searchGame(inputGameUser.value)'>Szukaj</button>
-
+    <button>SignUp</button>
+    <button>Register</button>

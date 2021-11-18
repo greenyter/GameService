@@ -10,6 +10,8 @@ import { SearchComponent } from './search/search.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SafePipe } from './safe.pipe';
+import { HomeComponent } from './home/home.component';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import { SafePipe } from './safe.pipe';
     GameComponent,
     SearchComponent,
     SafePipe,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { SafePipe } from './safe.pipe';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    AuthModule
   ],
   providers: [GameService],
   bootstrap: [AppComponent]

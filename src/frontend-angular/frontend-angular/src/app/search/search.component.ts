@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
 
   searchGame(value:string):void{
 
-      this.router.navigateByUrl(`game/${value}`);
+      this.router.navigateByUrl(`game/name/${value}`);
   }
 
   public getValue():any{
