@@ -1,3 +1,5 @@
+import { RegisterService } from './auth/components/register/register.service';
+import { User } from './auth/user/user';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,6 +23,7 @@ import { AuthModule } from './auth/auth.module';
     SearchComponent,
     SafePipe,
     HomeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -30,9 +33,10 @@ import { AuthModule } from './auth/auth.module';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    AuthModule
+    AuthModule,
+  
   ],
-  providers: [GameService],
+  providers: [GameService, RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

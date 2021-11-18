@@ -14,6 +14,7 @@ import java.util.List;
 
 @Path("/game")
 @Stateless
+@PermitAll
 public class GameResource {
 
     @Inject
@@ -32,6 +33,7 @@ public class GameResource {
         return Response.ok(game).build();
     }
     @GET
+    @PermitAll
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/name/{gameName}")
     public Response getGameByName(@PathParam("gameName") String name){
@@ -43,7 +45,7 @@ public class GameResource {
         }
         return Response.ok(game).build();
     }
-    @RolesAllowed("USER")
+    @PermitAll
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/all")

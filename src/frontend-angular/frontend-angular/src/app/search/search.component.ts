@@ -9,11 +9,18 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
+  
   constructor(private router: Router) { }
   value!:string;
   ngOnInit(): void {
   }
   
+  loginButton():void{
+    this.router.navigateByUrl(`login`);
+  }
+  registerButton():void{
+    this.router.navigateByUrl(`register`);
+  }
 
   searchGame(value:string):void{
 

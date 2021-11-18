@@ -1,1 +1,24 @@
-<p>register works!</p>
+<head>
+    <title> Game Service - Sign Up</title>
+    <link rel="stylesheet" href="register.component.css">
+</head>
+<body>
+    <div class="signup-box">
+        <h1>Sign Up</h1>
+        <h4>Sign up to get access to the best gaming ranking site!</h4>
+        <form>
+            <label>User</label>
+            <input #userName type="user" placeholder="" />
+            <label>Email</label>
+            <input #emailName type="email" placeholder="" />
+            <label>Password</label>
+            <input #passwordName type="password" placeholder="" />
+            <label>Confirm Password</label>
+            <input #confirmPasswordName type="password" placeholder="" />
+            <input (click)='sendRequestUser(userName.value, emailName.value, passwordName.value)' type="button" value="Submit" />
+          </form>
+    </div>
+    <p class="para-2">
+        Already have an account? <a href="login.component.html">Login here</a>
+      </p>
+</body>
