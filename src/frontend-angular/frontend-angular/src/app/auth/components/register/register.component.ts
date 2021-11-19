@@ -1,8 +1,9 @@
 
 import { RegisterService } from './register.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { User } from '../../user/user';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
 
   public sendRequestUser(userName:string, userPassword:string, userEmail:string): void {
     this.registerService.sendUser(userName, userPassword, userEmail).subscribe(
