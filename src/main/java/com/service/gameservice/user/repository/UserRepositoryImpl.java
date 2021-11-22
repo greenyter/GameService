@@ -64,8 +64,7 @@ public class UserRepositoryImpl implements UserRepository {
     /*
     @Override
     public User checkIfUserIsAdmin(Long id) {
-        getEntityManager();
-        TypedQuery<User> q = em.createQuery("SELECT u.isAdmin FROM User u WHERE u.id = :id", User.class);
+        getEntityManager();        TypedQuery<User> q = em.createQuery("SELECT u.isAdmin FROM User u WHERE u.id = :id", User.class);
 
         q.setParameter("id",id);
 
@@ -117,5 +116,16 @@ public class UserRepositoryImpl implements UserRepository {
         }catch (NoResultException e) {
             return false;
         }
+    }
+
+    @Override
+    @Transactional
+    public void sendTokenForUserToDb(String token,Long id) {
+        getEntityManager();
+        em.getTransaction().begin();
+        String query = "UPDATE User SET tokenUser=:token WHERE id=:id";
+        int executeUpdate= em.createQuery(query).setParameter("token", token).setParameter("id", id).executeUpdate();
+        em.getTransaction().commit();
+        em.close();
     }
 }

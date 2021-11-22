@@ -40,6 +40,10 @@ public class User {
     @Column(name = "userConfirmEmail")
     private boolean userConfirmEmail;
 
+    @Basic
+    @Column(name = "tokenUser")
+    private String tokenUser;
+
 
     public void setUserPassword(String userPassword){
         if(userPassword.length() < 8 || userPassword.length() > 12 ){

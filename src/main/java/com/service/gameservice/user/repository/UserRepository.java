@@ -21,4 +21,5 @@ public interface UserRepository {
     //utils
     String encodePassword(String password);
     boolean checkIfUserNameExist(String userName);
+    void sendTokenForUserToDb(String token,Long id);
 }

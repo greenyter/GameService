@@ -1,5 +1,6 @@
 package com.service.gameservice.game.resource;
 
+import com.service.gameservice.domain.AuthFilter;
 import com.service.gameservice.game.entity.Game;
 import com.service.gameservice.game.repository.GameRepositoryImpl;
 import jakarta.annotation.security.PermitAll;
@@ -23,9 +24,12 @@ public class GameResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/id/{id}")
-    public Response getGameById(@PathParam("id") Long id) {
+    public Response getGameById(@PathParam("id") Long id,
+                                @QueryParam("userName") String username,
+                                @QueryParam("password") String password) {
         Game game = gameRepository.findGameById(id);
-
+        AuthFilter authFilter = new AuthFilter();
+        authFilter.authUser(username,password);
         if (game == null) {
             return Response.status(Response.Status.NOT_FOUND).
                     entity("Game with given id not exists").build();
