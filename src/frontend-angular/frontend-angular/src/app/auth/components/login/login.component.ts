@@ -1,4 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../user/user';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  private user:User | undefined;
+  constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
   }
 
+  public getRequestUser(userName:string, userPassword:string): void {
+    this.loginService.getUser(userName, userPassword).subscribe(
+      (response: User) => {
+        this.user = response;
+        console.log(this.user);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
 }
