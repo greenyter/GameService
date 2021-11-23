@@ -1,5 +1,6 @@
 package com.service.gameservice.user.resource;
 
+import com.service.gameservice.domain.AuthFilter;
 import com.service.gameservice.user.entity.User;
 import com.service.gameservice.user.repository.UserRepositoryImpl;
 import jakarta.annotation.security.PermitAll;
@@ -9,11 +10,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.Provider;
 
 import javax.ejb.PostActivate;
 import javax.ejb.Stateless;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Path("/user")
 @Stateless
@@ -60,6 +63,56 @@ public class UserResource {
         }
         return Response.ok(user).status(200).build();
     }
+
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/login")
+    public Response loggedUser(@NotNull @QueryParam("userName")String name,
+                               @NotNull @QueryParam("userPassword")String password){
+
+        User user = userRepository.findUserByName(name);
+
+        if(userRepository.checkUserCredentials(name,password)!=null && Objects.equals(userRepository.checkIfLogged(user.getId()), "logged")){
+            return Response.ok("User was logged already").build();
+        }
+
+        AuthFilter authFilter = new AuthFilter();
+
+        if(authFilter.authUser(name,password)) {
+            return Response.ok("User was logged successfully").build();
+        }else{
+            return Response.ok("Wrong credentials").build();
+        }
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/ifLogged")
+    public Response checkUserStatusLogging(@NotNull @QueryParam("id")Long id){
+        User user = userRepository.findUserById(id);
+
+        if(Objects.equals(userRepository.checkIfLogged(user.getId()), "logged")){
+            return Response.ok("User is logged").build();
+        }else{
+            return Response.ok("User is not logged").build();
+        }
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/logout")
+    public Response logOutUser(@NotNull @QueryParam("id")Long id){
+        User user = userRepository.findUserById(id);
+
+        if(Objects.equals(userRepository.checkIfLogged(user.getId()), "logged")){
+            userRepository.logoutUser(user.getId());
+            return Response.ok("User is unlogged").build();
+        }else{
+            return Response.ok("User is not logged already").build();
+        }
+
+    }
+
 /*
     @GET
     @Produces({MediaType.APPLICATION_JSON})

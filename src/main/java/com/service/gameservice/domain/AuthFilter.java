@@ -19,19 +19,24 @@ public class AuthFilter {
     private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
     private UserRepositoryImpl userRepository = new UserRepositoryImpl();
 
-    public void authUser(String userName, String password){
+    public boolean authUser(String userName, String password){
 
 
 
         if(getUserFromDB(userName,password)) {
-
+/*
             byte[] randomBytes = new byte[32];
             secureRandom.nextBytes(randomBytes);
             base64Encoder.encodeToString(randomBytes);
             String token = base64Encoder.encodeToString(randomBytes);
+ */
             User getUser = userRepository.findUserByName(userName);
-            userRepository.sendTokenForUserToDb(token,getUser.getId());
+
+
+            userRepository.sendTokenForUserToDb("logged",getUser.getId());
+            return true;
         }
+        return false;
     }
 
 

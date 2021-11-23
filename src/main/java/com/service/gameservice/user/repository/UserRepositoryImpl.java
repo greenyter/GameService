@@ -7,6 +7,7 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 @ApplicationScoped
@@ -127,5 +128,22 @@ public class UserRepositoryImpl implements UserRepository {
         int executeUpdate= em.createQuery(query).setParameter("token", token).setParameter("id", id).executeUpdate();
         em.getTransaction().commit();
         em.close();
+    }
+
+    @Override
+    @Transactional
+    public void logoutUser(Long id) {
+        getEntityManager();
+        em.getTransaction().begin();
+        String query = "UPDATE User SET tokenUser='notlogged' WHERE id=:id";
+        int executeUpdate= em.createQuery(query).setParameter("id", id).executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    @Override
+    public String checkIfLogged(Long id) {
+        getEntityManager();
+        return  findUserById(id).getTokenUser();
     }
 }
