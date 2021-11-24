@@ -1,12 +1,14 @@
 body {
-    background-color:#49c1a2;
+    background-color:black;
     font-family: "Roboto", sans-serif;
+    padding: 30px;
 }
 .login-box {
     width: 360px;
-    height: 280px;
+    height: 350px;
     margin: auto;
-    border-radius: 3px;
+    padding: 10px;
+    border-radius: 10px;
     background-color: white;
   }
   h1 {
@@ -48,10 +50,10 @@ body {
   }
   .para-2 {
     text-align: center;
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 15px;
     margin-top: -10px;
   }
   .para-2 a {
-    color: #000000;
+    color: #ffffff;
   }

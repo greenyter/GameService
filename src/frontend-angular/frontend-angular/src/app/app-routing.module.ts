@@ -6,15 +6,8 @@ import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [ 
   { path: 'game/name/:gameName', component: GameComponent },
-  {path: '', component: SearchComponent}, 
-  {
-    path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'search/name/:game-search',
-    component: HomeComponent,
-  }
+  {path: '', component: HomeComponent}, 
+  
 ];
 
 @NgModule({

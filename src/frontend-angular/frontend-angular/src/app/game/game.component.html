@@ -1,21 +1,50 @@
+<head>
+    <title>Game Service - {{game.gameName}} </title>
+    <link rel="stylesheet" href="game.component.css" />
+</head>
+<body>
 <div class="center" routerLink='/game/name/{{namePath}}'>
-    <p>Title: {{game.gameName}}</p>
-    <p>Release date: {{game.releaseDate | date:'dd-MM-yyyy'}}</p>
-    <p>Publisher: {{game.publisherName}}</p>
-    <p>Developer: {{game.developerName}}</p>
-    <p>Description: {{game.gameDescription}}</p>
-    <p> 
-    <figure>
-        <img src={{game.gameCover}}>
-        <figcaption>Game cover</figcaption>
-    </figure>
-    </p>
-    <p>
-        <figure>
-        <iframe width="420" height="315" [src]="game.gameTrailer | safe"></iframe>
-        <figcaption>Game trailer</figcaption>
-    </figure>
-    </p>
+    <div class="game-header"> 
+        <br>
+        <h1>{{game.gameName}}<br></h1>
+        <br>
+        <br>
+        <p>Release date: {{game.releaseDate | date:'dd-MM-yyyy'}}</p>
+        <p>Publisher: {{game.publisherName}}</p>
+        <p>Developer: {{game.developerName}}</p>
+        
+    </div>
+    <div class="game-image"> 
+        <p>
+            <figure>
+                <img src={{game.gameCover}}>
+                
+            </figure>
+        </p>
+    </div>
+    <div class="game-desciption">
+        <br>
+        <h2>Description</h2>
+        <br>
+        <p>{{game.gameDescription}}</p>
 
-
+    </div>
+    <div class="game-trailer">
+        <p>
+            <figure>
+                <br>
+                <h4>Game trailer</h4>
+                <br>
+                <iframe width="500" height="315" [src]="game.gameTrailer | safe" ></iframe>
+            </figure>
+        </p>
+    </div>
+    <div class="comments">
+        <br>
+        <h5>Comment about the game here! - (comment-count) comments</h5>
+        <br>
+        <textarea></textarea>
+        <button>add comment</button>
+    </div>
 </div>
+</body>
