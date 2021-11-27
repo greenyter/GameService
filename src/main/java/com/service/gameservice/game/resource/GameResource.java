@@ -15,7 +15,6 @@ import java.util.List;
 
 @Path("/game")
 @Stateless
-@PermitAll
 public class GameResource {
 
     @Inject
@@ -24,12 +23,8 @@ public class GameResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/id/{id}")
-    public Response getGameById(@PathParam("id") Long id,
-                                @QueryParam("userName") String username,
-                                @QueryParam("password") String password) {
+    public Response getGameById(@PathParam("id") Long id) {
         Game game = gameRepository.findGameById(id);
-        AuthFilter authFilter = new AuthFilter();
-        authFilter.authUser(username,password);
         if (game == null) {
             return Response.status(Response.Status.NOT_FOUND).
                     entity("Game with given id not exists").build();
@@ -37,7 +32,6 @@ public class GameResource {
         return Response.ok(game).build();
     }
     @GET
-    @PermitAll
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/name/{gameName}")
     public Response getGameByName(@PathParam("gameName") String name){
@@ -49,7 +43,6 @@ public class GameResource {
         }
         return Response.ok(game).build();
     }
-    @PermitAll
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/all")

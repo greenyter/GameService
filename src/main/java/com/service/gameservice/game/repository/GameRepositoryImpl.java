@@ -4,7 +4,6 @@ import com.service.gameservice.game.entity.Game;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
-import javax.ejb.Stateless;
 import javax.persistence.*;
 import java.util.List;
 
