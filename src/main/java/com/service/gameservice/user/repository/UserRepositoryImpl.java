@@ -146,4 +146,13 @@ public class UserRepositoryImpl implements UserRepository {
         getEntityManager();
         return  findUserById(id).getTokenUser();
     }
+
+    @Override
+    public void deleteUser(Long id) {
+        getEntityManager();
+        em.getTransaction().begin();
+        User user = em.find(User.class,id);
+        em.remove(user);
+        em.getTransaction().commit();
+    }
 }

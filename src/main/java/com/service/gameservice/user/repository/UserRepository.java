@@ -24,4 +24,7 @@ public interface UserRepository {
     void sendTokenForUserToDb(String token,Long id);
     void logoutUser(Long id);
     String checkIfLogged(Long id);
+
+    //DELETE
+    void deleteUser(Long id);
 }

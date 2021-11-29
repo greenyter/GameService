@@ -3,7 +3,6 @@ package com.service.gameservice.user.resource;
 import com.service.gameservice.domain.AuthFilter;
 import com.service.gameservice.user.entity.User;
 import com.service.gameservice.user.repository.UserRepositoryImpl;
-import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +29,6 @@ public class UserResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getUserById(@QueryParam("id") Long id){
         User user = userRepository.findUserById(id);
-
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).
                     entity("User with given id not exists").build();
@@ -38,6 +36,13 @@ public class UserResource {
         return Response.ok(user).status(200).build();
     }
 
+    @DELETE
+    @Path("/deleteUser")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response deleteUser(@QueryParam("id")Long id){
+        userRepository.deleteUser(id);
+        return Response.ok("Done").status(200).build();
+    }
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/name")
@@ -129,7 +134,6 @@ public class UserResource {
     }
 
  */
-    @PermitAll
     @POST
     @Path("/add/new_user")
     @Produces({MediaType.APPLICATION_JSON})
