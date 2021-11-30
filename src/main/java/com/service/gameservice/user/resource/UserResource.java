@@ -140,6 +140,7 @@ public class UserResource {
     public Response createUser(@NotNull @QueryParam("userName")String name,
                                @NotNull @QueryParam("userPassword")String password,
                                @NotNull @QueryParam("userEmail")String email){
+        userRepository.getEntityManager();
         if(name.isEmpty() || password.isEmpty()){
             return Response.status(Response.Status.FORBIDDEN).
                     entity("There is a forbidden input!").build();

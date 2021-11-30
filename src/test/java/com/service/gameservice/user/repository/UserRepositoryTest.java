@@ -1,14 +1,15 @@
 package com.service.gameservice.user.repository;
 
+
 import com.service.gameservice.user.entity.User;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,12 +17,21 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UserRepositoryTest {
 
+
+    @PersistenceContext
+    private EntityManager em;
+
     @Inject
-    UserRepository userRepository;
+    UserRepositoryImpl userRepository;
+
+    public void getEntityManager() {
+        EntityManagerFactory entityManagerFactory =
+                Persistence.createEntityManagerFactory("tests");
+        em = entityManagerFactory.createEntityManager();
+    }
 
 
     private void deleteCreatedRecord(String name){
-        userRepository = new UserRepositoryImpl();
         User findUser = userRepository.findUserByName(name);
 
         userRepository.deleteUser(findUser.getId());
@@ -29,7 +39,8 @@ public class UserRepositoryTest {
 
     @Test
     public void testCreateNewUser_ExpectSuccess(){
-        userRepository = new UserRepositoryImpl();
+        getEntityManager();
+        userRepository = new UserRepositoryImpl(em);
         User user = new User();
         user.setUserName("aaa");
         user.setUserPassword("12345678");
@@ -49,7 +60,8 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindById_ExpectSuccess(){
-        userRepository = new UserRepositoryImpl();
+        getEntityManager();
+        userRepository = new UserRepositoryImpl(em);
         User user = new User();
         user.setUserName("aaa");
         user.setUserPassword("12345678");
@@ -64,7 +76,8 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindByName_ExpectSuccess(){
-        userRepository = new UserRepositoryImpl();
+        getEntityManager();
+        userRepository = new UserRepositoryImpl(em);
         User user = new User();
         user.setUserName("aaa");
         user.setUserPassword("12345678");
@@ -79,7 +92,8 @@ public class UserRepositoryTest {
 
     @Test
     public void testCheckCredentials_ExpectSuccess(){
-        userRepository = new UserRepositoryImpl();
+        getEntityManager();
+        userRepository = new UserRepositoryImpl(em);
         User user = new User();
         user.setUserName("aaa");
         user.setUserPassword(userRepository.encodePassword("12345678"));
@@ -93,7 +107,8 @@ public class UserRepositoryTest {
 
     @Test
     public void testCheckIfUserExists_ExpectSuccess(){
-        userRepository = new UserRepositoryImpl();
+        getEntityManager();
+        userRepository = new UserRepositoryImpl(em);
         User user = new User();
         user.setUserName("aaa");
         user.setUserPassword(userRepository.encodePassword("12345678"));
@@ -107,17 +122,16 @@ public class UserRepositoryTest {
 
     @Test
     public void testSendTokenForUserToDb_ExpectSuccess(){
-        userRepository = new UserRepositoryImpl();
+        getEntityManager();
+        userRepository = new UserRepositoryImpl(em);
         User user = new User();
         user.setUserName("aaa");
         user.setUserPassword(userRepository.encodePassword("12345678"));
         user.setUserEmail("email");
 
         userRepository.addUser(user);
-
         userRepository.sendTokenForUserToDb("logged",user.getId());
-        String result = userRepository.checkIfLogged(user.getId());
-        assertThat(result,equalTo("logged"));
+        assertThat(user.getTokenUser(),equalTo("logged"));
 
         deleteCreatedRecord("aaa");
     }
@@ -125,13 +139,13 @@ public class UserRepositoryTest {
 
     @Test
     public void testCheckIfLogged_ExpectSuccess(){
-        userRepository = new UserRepositoryImpl();
+        getEntityManager();
+        userRepository = new UserRepositoryImpl(em);
         User user = new User();
         user.setUserName("aaa");
         user.setUserPassword(userRepository.encodePassword("12345678"));
         user.setUserEmail("email");
         user.setTokenUser("lol");
-
         userRepository.addUser(user);
 
         String result = userRepository.checkIfLogged(user.getId());

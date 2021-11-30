@@ -2,6 +2,7 @@ package com.service.gameservice.user.repository;
 
 import com.service.gameservice.user.entity.User;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.hibernate.annotations.TypeDef;
 
@@ -14,10 +15,17 @@ import java.util.Objects;
 @Transactional
 public class UserRepositoryImpl implements UserRepository {
 
-    @PersistenceContext(unitName = "default")
+
+    @PersistenceContext
     private EntityManager em;
 
-    private void getEntityManager() {
+
+    public UserRepositoryImpl(EntityManager em){
+        this.em = em;
+    }
+    public UserRepositoryImpl(){}
+
+    public void getEntityManager() {
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory("Testing");
         em = entityManagerFactory.createEntityManager();
@@ -26,13 +34,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findUserById(Long id) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
         return em.find(User.class, id);
     }
 
     @Override
     public User findUserByName(String name) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
         TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
         q.setParameter("userName", name);
         return q.getSingleResult();
@@ -40,7 +52,9 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findUserByEmail(String email) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
         TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.userEmail = :userEmail", User.class);
         q.setParameter("userEmail", email);
         return q.getSingleResult();
@@ -48,7 +62,9 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User checkUserCredentials(String userName, String password) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
         String encodePassword = encodePassword(password);
         try {
 
@@ -77,7 +93,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     @Transactional
     public void addUser(User user) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
@@ -108,8 +126,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean checkIfUserNameExist(String userName) {
-        getEntityManager();
         try {
+            if(em == null){
+                getEntityManager();
+            }
             TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
             q.setParameter("userName", userName);
             q.getSingleResult();
@@ -122,18 +142,24 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     @Transactional
     public void sendTokenForUserToDb(String token,Long id) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
         em.getTransaction().begin();
         String query = "UPDATE User SET tokenUser=:token WHERE id=:id";
-        int executeUpdate= em.createQuery(query).setParameter("token", token).setParameter("id", id).executeUpdate();
+        Query executeUpdate= em.createQuery(query);
+                executeUpdate.setParameter("token", token);
+                executeUpdate.setParameter("id", id).executeUpdate();
         em.getTransaction().commit();
-        em.close();
+        em.refresh(findUserById(id));
     }
 
     @Override
     @Transactional
     public void logoutUser(Long id) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
         em.getTransaction().begin();
         String query = "UPDATE User SET tokenUser='notlogged' WHERE id=:id";
         int executeUpdate= em.createQuery(query).setParameter("id", id).executeUpdate();
@@ -143,13 +169,18 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public String checkIfLogged(Long id) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
+
         return  findUserById(id).getTokenUser();
     }
 
     @Override
     public void deleteUser(Long id) {
-        getEntityManager();
+        if(em == null){
+            getEntityManager();
+        }
         em.getTransaction().begin();
         User user = em.find(User.class,id);
         em.remove(user);
