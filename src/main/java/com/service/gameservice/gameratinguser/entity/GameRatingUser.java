@@ -1,20 +1,17 @@
-package com.service.gameservice.comment_user;
+package com.service.gameservice.gameratinguser.entity;
 
-import com.service.gameservice.game.entity.Game;
-import com.service.gameservice.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name ="commentuser")
+@Table(name ="gameratinguser")
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment implements Serializable {
+public class GameRatingUser {
 
     @Id
     @Column(name = "id")
@@ -22,8 +19,8 @@ public class Comment implements Serializable {
     private Long id;
 
     @Basic
-    @Column(name = "comment")
-    private String commentText;
+    @Column(name = "gameRatingUser")
+    private int gameRatingUser;
 
     @Basic
     @Column(name = "game_id")

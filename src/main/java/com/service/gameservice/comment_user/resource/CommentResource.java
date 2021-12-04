@@ -1,6 +1,7 @@
-package com.service.gameservice.comment_user;
+package com.service.gameservice.comment_user.resource;
 
-import com.service.gameservice.game.repository.GameRepository;
+import com.service.gameservice.comment_user.entity.Comment;
+import com.service.gameservice.comment_user.repository.CommentRepositoryImpl;
 import com.service.gameservice.game.repository.GameRepositoryImpl;
 import com.service.gameservice.user.repository.UserRepositoryImpl;
 import jakarta.inject.Inject;

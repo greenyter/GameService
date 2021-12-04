@@ -1,4 +1,6 @@
-package com.service.gameservice.comment_user;
+package com.service.gameservice.comment_user.repository;
+
+import com.service.gameservice.comment_user.entity.Comment;
 
 public interface CommentRepository {
 

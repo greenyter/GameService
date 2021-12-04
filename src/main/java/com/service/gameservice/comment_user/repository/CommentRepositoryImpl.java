@@ -1,6 +1,6 @@
-package com.service.gameservice.comment_user;
+package com.service.gameservice.comment_user.repository;
 
-import com.service.gameservice.user.entity.User;
+import com.service.gameservice.comment_user.entity.Comment;
 import jakarta.transaction.Transactional;
 
 import javax.persistence.EntityManager;
