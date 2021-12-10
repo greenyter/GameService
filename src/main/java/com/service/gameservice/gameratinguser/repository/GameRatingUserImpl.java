@@ -5,6 +5,7 @@ import com.service.gameservice.game.repository.GameRepositoryImpl;
 import com.service.gameservice.gameratinguser.entity.GameRatingUser;
 import com.service.gameservice.user.repository.UserRepositoryImpl;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,6 +24,7 @@ public class GameRatingUserImpl implements GameRatingUserRepository{
     }
 
     @Override
+    @Transactional
     public void addRate(GameRatingUser rate) {
         getEntityManager();
         em.getTransaction().begin();

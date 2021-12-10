@@ -3,6 +3,7 @@ package com.service.gameservice.gameratinguser.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name ="gameratinguser")
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class GameRatingUser {
+public class GameRatingUser implements Serializable {
 
     @Id
     @Column(name = "id")
