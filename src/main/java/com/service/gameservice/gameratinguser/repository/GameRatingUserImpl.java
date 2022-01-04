@@ -1,5 +1,6 @@
 package com.service.gameservice.gameratinguser.repository;
 
+import com.service.gameservice.comment_user.entity.CommentUser;
 import com.service.gameservice.comment_user.repository.CommentRepositoryImpl;
 import com.service.gameservice.game.repository.GameRepositoryImpl;
 import com.service.gameservice.gameratinguser.entity.GameRatingUser;
@@ -7,10 +8,7 @@ import com.service.gameservice.user.repository.UserRepositoryImpl;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 
 public class GameRatingUserImpl implements GameRatingUserRepository{
 
@@ -45,5 +43,13 @@ public class GameRatingUserImpl implements GameRatingUserRepository{
         em.getTransaction().commit();
         em.close();
 
+    }
+
+    @Override
+    public GameRatingUser getCommentByIdUser(Long id) {
+        getEntityManager();
+        TypedQuery<GameRatingUser> q = em.createQuery("SELECT c FROM GameRatingUser c WHERE c.idUser = :id", GameRatingUser.class);
+        q.setParameter("id", id);
+        return q.getSingleResult();
     }
 }

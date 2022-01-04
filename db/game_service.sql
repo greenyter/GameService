@@ -57,7 +57,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `game_service`.`commentsuser` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `comment` CHAR(1) NULL DEFAULT NULL,
+  `commentUser` CHAR(1) NULL DEFAULT NULL,
   `game_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`, `game_id`, `user_id`),

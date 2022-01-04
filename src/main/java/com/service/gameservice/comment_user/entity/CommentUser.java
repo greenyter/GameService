@@ -1,7 +1,5 @@
 package com.service.gameservice.comment_user.entity;
 
-import com.service.gameservice.game.entity.Game;
-import com.service.gameservice.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +12,7 @@ import java.io.Serializable;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment implements Serializable {
+public class CommentUser implements Serializable {
 
     @Id
     @Column(name = "id")

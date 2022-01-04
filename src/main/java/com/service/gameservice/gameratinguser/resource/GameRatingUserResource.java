@@ -1,10 +1,10 @@
 package com.service.gameservice.gameratinguser.resource;
 
-import com.service.gameservice.comment_user.entity.Comment;
-import com.service.gameservice.comment_user.repository.CommentRepositoryImpl;
+import com.service.gameservice.comment_user.entity.CommentUser;
 import com.service.gameservice.game.repository.GameRepositoryImpl;
 import com.service.gameservice.gameratinguser.entity.GameRatingUser;
 import com.service.gameservice.gameratinguser.repository.GameRatingUserImpl;
+import com.service.gameservice.user.entity.User;
 import com.service.gameservice.user.repository.UserRepositoryImpl;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -72,5 +72,18 @@ public class GameRatingUserResource {
         gameRatingUser.modifyRate(idUser,idGame,rate);
 
         return Response.status(200).entity("UPDATED").build();
+    }
+
+    @GET
+    @Path("/id")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getCommentByIdUser(@QueryParam("idUser") Long id){
+        User user = userRepository.findUserById(id);
+        GameRatingUser gameRatingUser = this.gameRatingUser.getCommentByIdUser(id);
+        if (user == null && gameRatingUser==null) {
+            return Response.status(Response.Status.NOT_FOUND).
+                    entity("User with given id not exists").build();
+        }
+        return Response.ok(gameRatingUser).status(200).build();
     }
 }
