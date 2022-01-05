@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "game", schema = "game_service")
+@Table(name = "game")
 @Getter
 @Setter
 @ToString
