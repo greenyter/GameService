@@ -14,7 +14,10 @@ import { MatInputModule } from '@angular/material/input';
 import { SafePipe } from './safe.pipe';
 import { HomeComponent } from './home/home.component';
 import { AuthModule } from './auth/auth.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon'; 
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { AuthModule } from './auth/auth.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -34,7 +38,9 @@ import { AuthModule } from './auth/auth.module';
     MatFormFieldModule,
     MatInputModule,
     AuthModule,
-  
+    MatSelectModule,
+    MatOptionModule,
+    MatIconModule,
   ],
   providers: [GameService, RegisterService],
   bootstrap: [AppComponent]

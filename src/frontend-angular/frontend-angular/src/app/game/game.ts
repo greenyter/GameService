@@ -8,3 +8,8 @@ export interface Game{
     gameTrailer:string;    
     gameDescription:string;
 }
+interface Rating {
+  id: number;
+  count: number;
+  title: string;
+}
