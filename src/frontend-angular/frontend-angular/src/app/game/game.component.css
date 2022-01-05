@@ -1,6 +1,44 @@
 .center {
     margin: auto;
-    width: 50%;
-    border: 3px solid green;
+    width: 1000px;
+    border: 3px solid black;
     padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #3f51b5;
+    font-weight: 400;
+    font-size: 20px;
+  }
+  .game-header{
+    float: left;
+    background-color: rgb(0, 0, 0);
+    width: 600px;
+   min-height: 400px;
+   padding: 20px;
+   color: rgb(255, 255, 255);
+   font-size: 20px;
+   text-align:center;
+  }
+  h1{
+    font-weight: 1000;
+    font-size: 40px;
+    text-align:center;
+  }
+  .game-image{
+    float: left;
+    background-color: rgb(255, 255, 255);
+    width: 360px;
+    min-height: 400px;
+    padding: 20px;
+  }
+  .game-desciption{
+    clear: both;
+  }
+  h2{
+    text-align:center;
+  }
+  .game-trailer{
+    
+    text-align:center;
+    min-height: 300px;
   }

@@ -1,20 +1,19 @@
-<!--
 <head>
     <title>Game Service - Login</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="login.component.css" />
   </head>
   <body>
     <div class="login-box">
       <h1>Login</h1>
       <form>
-        <label>Email</label>
-        <input type="email" placeholder="" />
+        <label>Username</label>
+        <input #userName type="user" placeholder="" />
         <label>Password</label>
-        <input type="password" placeholder="" />
-        <input type="button" value="Submit" />
+        <input #passwordName type="password" placeholder="" />
+        <input (click)='getRequestUser(userName.value, passwordName.value)' type="button" value="Submit" />
       </form>
     </div>
     <p class="para-2">
-      Not have an account? <a href="register.component.html">Sign Up Here</a>
+      Not have an account? <a href="/register">Sign Up Here</a>
     </p>
-  </body>-->
+  </body>
