@@ -1,8 +1,10 @@
 <head>
-    <title>Game Service - Login</title>
-    <link rel="stylesheet" href="login.component.css" />
-  </head>
-  <body>
+  <title>Game Service - Login</title>
+  <link rel="stylesheet" href="login.component.css" />
+</head>
+
+<body>
+  
     <div class="login-box">
       <h1>Login</h1>
       <form>
@@ -10,10 +12,11 @@
         <input #userName type="user" placeholder="" />
         <label>Password</label>
         <input #passwordName type="password" placeholder="" />
-        <input (click)='getRequestUser(userName.value, passwordName.value)' type="button" value="Submit" />
+        <input (click)='sendRequestUser(userName.value, passwordName.value)' type="button" value="Submit" />
       </form>
     </div>
     <p class="para-2">
       Not have an account? <a href="/register">Sign Up Here</a>
     </p>
+    
   </body>

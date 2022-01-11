@@ -1,7 +1,6 @@
 package com.service.gameservice.user.entity;
 
 import lombok.*;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 

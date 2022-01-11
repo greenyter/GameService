@@ -1,24 +1,30 @@
 package com.service.gameservice.comment_user.repository;
 
 import com.service.gameservice.comment_user.entity.CommentUser;
-import com.service.gameservice.game.entity.Game;
-import com.service.gameservice.user.entity.User;
 import jakarta.transaction.Transactional;
 
 import javax.persistence.*;
 
 public class CommentRepositoryImpl implements CommentRepository{
 
+
     @PersistenceContext(unitName = "default")
     private EntityManager em;
 
+    /**
+     * Setting entity manager by persistence unit name provided by persistence.xml in
+     * resources
+     */
     private void getEntityManager() {
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory("Testing");
         em = entityManagerFactory.createEntityManager();
     }
 
-
+    /**
+     * Add new comment
+     * @param commentUser object class's Comment
+     */
     @Override
     @Transactional
     public void addComment(CommentUser commentUser) {
@@ -28,6 +34,12 @@ public class CommentRepositoryImpl implements CommentRepository{
         em.getTransaction().commit();
     }
 
+    /**
+     * Modify comment
+     * @param id_user id of user which added comment
+     * @param id_game id of game where comment was added
+     * @param text    modified text
+     */
     @Override
     @Transactional
     public void modifyComment(Long id_user,Long id_game,String text) {
@@ -43,6 +55,11 @@ public class CommentRepositoryImpl implements CommentRepository{
         em.close();
     }
 
+    /**
+     * Get comment added by provided user in particular game
+     * @param id id of user which added comment
+     * @return comment added that user
+     */
     @Override
     public CommentUser getCommentByIdUser(Long id) {
         getEntityManager();

@@ -5,6 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Entity describing comments added by users.
+ * Every comment contains user id, game id and, of course, comment itself.
+ */
 @Entity
 @Table(name ="commentuser")
 @Getter

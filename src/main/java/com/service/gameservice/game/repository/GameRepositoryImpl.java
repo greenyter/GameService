@@ -14,6 +14,10 @@ public class GameRepositoryImpl implements GameRepository {
     @PersistenceContext(unitName = "default")
     private EntityManager em;
 
+    /**
+     * Setting entity manager by persistence unit name provided by persistence.xml in
+     * resources
+     */
     private void getEntityManager(){
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory("Testing");
@@ -21,13 +25,21 @@ public class GameRepositoryImpl implements GameRepository {
 
     }
 
-
+    /**
+     * Get game by given id if exists.
+     * @param id id of game
+     * @return game with given id or null if not exists
+     */
     @Override
     public Game findGameById(Long id){
         getEntityManager();
         return em.find(Game.class,id);
     }
-
+    /**
+     * Get game by given name if exists.
+     * @param name id of game
+     * @return game with given name or null if not exists
+     */
     @Override
     public Game findGameByName(String name) {
         getEntityManager();
@@ -36,6 +48,10 @@ public class GameRepositoryImpl implements GameRepository {
         return q.getSingleResult();
     }
 
+    /**
+     * Return all existed games in db.
+     * @return list of games
+     */
     @Override
     public List<Game> findAllGame() {
         getEntityManager();

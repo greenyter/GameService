@@ -4,17 +4,12 @@ import com.service.gameservice.domain.AuthFilter;
 import com.service.gameservice.user.entity.User;
 import com.service.gameservice.user.repository.UserRepositoryImpl;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.ext.Provider;
 
-import javax.ejb.PostActivate;
 import javax.ejb.Stateless;
-import java.awt.*;
-import java.util.Arrays;
 import java.util.Objects;
 
 @Path("/user")
@@ -84,7 +79,7 @@ public class UserResource {
         AuthFilter authFilter = new AuthFilter();
 
         if(authFilter.authUser(name,password)) {
-            return Response.ok("User was logged successfully").build();
+            return Response.ok(user).build();
         }else{
             return Response.ok("Wrong credentials").build();
         }
@@ -93,11 +88,11 @@ public class UserResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/ifLogged")
-    public Response checkUserStatusLogging(@NotNull @QueryParam("id")Long id){
-        User user = userRepository.findUserById(id);
+    public Response checkUserStatusLogging(@NotNull @QueryParam("userName")String username){
+        User user = userRepository.findUserByName(username);
 
         if(Objects.equals(userRepository.checkIfLogged(user.getId()), "logged")){
-            return Response.ok("User is logged").build();
+            return Response.ok("User is logged").entity(user).build();
         }else{
             return Response.ok("User is not logged").build();
         }

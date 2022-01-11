@@ -2,13 +2,9 @@ package com.service.gameservice.user.repository;
 
 import com.service.gameservice.user.entity.User;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Objects;
 
 
 @ApplicationScoped
@@ -37,6 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
+        em.clear();
         return em.find(User.class, id);
     }
 
@@ -45,6 +42,7 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
+        em.clear();
         TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
         q.setParameter("userName", name);
         return q.getSingleResult();
@@ -55,6 +53,7 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
+        em.clear();
         TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.userEmail = :userEmail", User.class);
         q.setParameter("userEmail", email);
         return q.getSingleResult();
@@ -65,6 +64,7 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
+        em.clear();
         String encodePassword = encodePassword(password);
         try {
 
@@ -96,6 +96,7 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
+        em.clear();
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
@@ -130,6 +131,7 @@ public class UserRepositoryImpl implements UserRepository {
             if(em == null){
                 getEntityManager();
             }
+            em.clear();
             TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
             q.setParameter("userName", userName);
             q.getSingleResult();
@@ -145,13 +147,14 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
+        em.clear();
         em.getTransaction().begin();
         String query = "UPDATE User SET tokenUser=:token WHERE id=:id";
         Query executeUpdate= em.createQuery(query);
                 executeUpdate.setParameter("token", token);
                 executeUpdate.setParameter("id", id).executeUpdate();
         em.getTransaction().commit();
-        em.refresh(findUserById(id));
+
     }
 
     @Override
@@ -160,11 +163,13 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
+        em.clear();
         em.getTransaction().begin();
         String query = "UPDATE User SET tokenUser='notlogged' WHERE id=:id";
         int executeUpdate= em.createQuery(query).setParameter("id", id).executeUpdate();
         em.getTransaction().commit();
-        em.close();
+
+
     }
 
     @Override
@@ -172,7 +177,7 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
-
+        em.clear();
         return  findUserById(id).getTokenUser();
     }
 
@@ -181,6 +186,7 @@ public class UserRepositoryImpl implements UserRepository {
         if(em == null){
             getEntityManager();
         }
+        em.clear();
         em.getTransaction().begin();
         User user = em.find(User.class,id);
         em.remove(user);

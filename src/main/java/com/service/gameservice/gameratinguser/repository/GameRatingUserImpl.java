@@ -1,11 +1,6 @@
 package com.service.gameservice.gameratinguser.repository;
 
-import com.service.gameservice.comment_user.entity.CommentUser;
-import com.service.gameservice.comment_user.repository.CommentRepositoryImpl;
-import com.service.gameservice.game.repository.GameRepositoryImpl;
 import com.service.gameservice.gameratinguser.entity.GameRatingUser;
-import com.service.gameservice.user.repository.UserRepositoryImpl;
-import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
 import javax.persistence.*;
@@ -15,12 +10,21 @@ public class GameRatingUserImpl implements GameRatingUserRepository{
     @PersistenceContext(unitName = "default")
     private EntityManager em;
 
+
+    /**
+     * Setting entity manager by persistence unit name provided by persistence.xml in
+     * resources
+     */
     private void getEntityManager() {
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory("Testing");
         em = entityManagerFactory.createEntityManager();
     }
 
+    /**
+     * Add new comment
+     * @param rate object class's rate
+     */
     @Override
     @Transactional
     public void addRate(GameRatingUser rate) {
@@ -30,6 +34,12 @@ public class GameRatingUserImpl implements GameRatingUserRepository{
         em.getTransaction().commit();
     }
 
+    /**
+     * Modify comment
+     * @param id_user id of user which added comment
+     * @param id_game id of game where comment was added
+     * @param rate    modified rate
+     */
     @Override
     public void modifyRate(Long id_user, Long id_game, int rate) {
         getEntityManager();
@@ -45,6 +55,11 @@ public class GameRatingUserImpl implements GameRatingUserRepository{
 
     }
 
+    /**
+     * Get rate added by provided user in particular game
+     * @param id id of user which added comment
+     * @return comment added that user
+     */
     @Override
     public GameRatingUser getCommentByIdUser(Long id) {
         getEntityManager();

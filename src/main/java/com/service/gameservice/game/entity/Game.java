@@ -10,6 +10,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * Entity describing game. Games cannot be added by user or from servlet.
+ * Game can be added, modified and deleted only using SQL and with access to db.
+ * Every game contains id, game's name, category, release date,
+ * publisher's name, developer's name, game's cover, game's trailer,
+ * game's description.
+ */
+
 @Entity
 @Table(name = "game")
 @Getter

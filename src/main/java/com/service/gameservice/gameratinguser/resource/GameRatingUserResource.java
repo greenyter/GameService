@@ -1,6 +1,5 @@
 package com.service.gameservice.gameratinguser.resource;
 
-import com.service.gameservice.comment_user.entity.CommentUser;
 import com.service.gameservice.game.repository.GameRepositoryImpl;
 import com.service.gameservice.gameratinguser.entity.GameRatingUser;
 import com.service.gameservice.gameratinguser.repository.GameRatingUserImpl;

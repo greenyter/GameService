@@ -5,6 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
+/**
+ * Entity describing rate added by users.
+ * Every rate contains user id, game id and game rate itself.
+ */
+
 @Entity
 @Table(name ="gameratinguser")
 @Getter

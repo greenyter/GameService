@@ -1,10 +1,12 @@
 package com.service.gameservice.game.resource;
 
-import com.service.gameservice.domain.AuthFilter;
 import com.service.gameservice.game.entity.Game;
 import com.service.gameservice.game.repository.GameRepositoryImpl;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 

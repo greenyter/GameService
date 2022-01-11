@@ -10,14 +10,44 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
 
-  private user:User | undefined;
+  private user!:User
   constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
   }
 
-  public getRequestUser(userName:string, userPassword:string): void {
-    this.loginService.getUser(userName, userPassword).subscribe(
+  public sendRequestUser(userName:string, userPassword:string): void {
+    this.loginService.tryToLogUser(userName, userPassword).subscribe(
+      (response: User) => {
+        this.user = response;
+        this.waitForOneSecond();
+        var userObject = JSON.stringify(this.user);
+        localStorage.setItem('user', userObject);
+        console.log(userObject);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+   
+  }
+  waitForOneSecond() {
+    return new Promise(resolve => {
+       setTimeout(() => {
+          resolve("I promise to return after one second!");
+       }, 1000);
+    });
+ }
+  public ifLogged():boolean{
+    if(this.user.tokenUser == "logged"){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public getUser(userName:string): void {
+    this.loginService.getUserByName(userName).subscribe(
       (response: User) => {
         this.user = response;
         console.log(this.user);

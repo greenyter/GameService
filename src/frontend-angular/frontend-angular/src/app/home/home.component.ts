@@ -1,8 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Game } from '../game/game';
-import { GameService } from '../game/game.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Game} from '../game/game';
+import {GameService} from '../game/game.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   public sort!: string;
   public game!: Game;
   public games: Game[] = [];
-  
+
   constructor(private route: ActivatedRoute,private gameService:GameService, private router: Router) {  }
 
   ngOnInit(): void {
@@ -27,9 +27,13 @@ export class HomeComponent implements OnInit {
         this.getGames();
         console.log(this.getGames)
       });
+      
+      var my_object = JSON.parse(localStorage.getItem('user') || '{}');
+      console.log(my_object);
+      
     }
   }
-  
+
   public getGames(): void {
     this.gameService.getGames().subscribe(
       (response: Game[]) => {

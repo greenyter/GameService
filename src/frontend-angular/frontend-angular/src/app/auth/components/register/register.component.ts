@@ -1,9 +1,7 @@
-
-import { RegisterService } from './register.service';
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { User } from '../../user/user';
-import { Observable } from 'rxjs';
+import {RegisterService} from './register.service';
+import {Component, OnInit} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {User} from '../../user/user';
 
 
 @Component({

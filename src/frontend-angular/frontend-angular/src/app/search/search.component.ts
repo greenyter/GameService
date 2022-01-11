@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-  
+
   constructor(private router: Router) { }
   value!:string;
   ngOnInit(): void {
   }
-  
+
   loginButton():void{
     this.router.navigateByUrl(`login`);
   }
