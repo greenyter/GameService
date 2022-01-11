@@ -23,4 +23,5 @@ export class LoginService {
 public getUserByName(userName:string):Observable<User>{
     return this.httpclient.get<User>(`http://localhost:8080/GameService/user/name?userName=`+userName);
   }
+
 }

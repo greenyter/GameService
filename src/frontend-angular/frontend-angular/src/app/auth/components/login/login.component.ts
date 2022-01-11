@@ -24,9 +24,10 @@ export class LoginComponent implements OnInit {
         var userObject = JSON.stringify(this.user);
         localStorage.setItem('user', userObject);
         console.log(userObject);
+        alert("You has been logged succesfully!");
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert("Wrong credentials!")
       }
     );
    
@@ -46,11 +47,18 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
+  public getStorageUser(){
+    if(localStorage.getItem('user')!=null){  
+      return JSON.parse(localStorage.getItem('user') || '{}')
+    }
+  }
+
   public getUser(userName:string): void {
     this.loginService.getUserByName(userName).subscribe(
       (response: User) => {
         this.user = response;
-        console.log(this.user);
+       
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

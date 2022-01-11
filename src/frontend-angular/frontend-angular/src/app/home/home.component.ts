@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
       (response: Game[]) => {
         this.games = response;
         console.log(this.games);
+        
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

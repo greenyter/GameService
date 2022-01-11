@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-
+  public USER = SearchComponent.getLocalStorage();
   constructor(private router: Router) { }
   value!:string;
   ngOnInit(): void {
@@ -23,8 +23,17 @@ export class SearchComponent implements OnInit {
   }
 
   searchGame(value:string):void{
+      
 
       this.router.navigateByUrl(`game/name/${value}`);
+  }
+
+  public static getLocalStorage(){
+    if(localStorage.getItem('user')!=null){
+      return localStorage.getItem('user');
+    }else{
+      return null;
+    }
   }
 
   public getValue():any{
